@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>layui分页</title>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+</head>
+
+<body>
+
+    <table id="demo" lay-filter="test"></table>
+
+    <script src="layui/layui.all.js"></script>
+    <script>
+        var table = layui.table;
+        table.render({
+            elem: '#demo'
+            , count: 100
+            , url: 'http://127.0.0.1:3000/paging'
+            , page: true
+            , cols: [[ //表头
+                { field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left' }
+                , { field: 'name', title: '用户名', width: 80 }
+                , { field: 'age', title: '年龄', width: 80, sort: true }
+                , { field: 'gender', title: '性别', width: 80 }
+                , { field: 'addr', title: '城市', width: 80 }
+                , { field: 'money', title: '财富', sort: true, width: 120 }
+            ]],
+            done: function (res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+            }
+        });
+    </script>
+</body>
+
+</html>
